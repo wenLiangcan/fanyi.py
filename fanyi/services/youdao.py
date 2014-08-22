@@ -22,6 +22,7 @@ def query(words):
     params['q'] = words
     r = http_get(api, params)
     data = r.json()
+    data['query'] = words # To avoid the numeric character references in returned data
     return data
 
 def compile(data):
