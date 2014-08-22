@@ -18,9 +18,11 @@ params = {
 api = 'http://dict-co.iciba.com/api/dictionary.php'
 
 def query(words):
-    params['w'] = words
+    params['w'] = words.lower()   # Lower case can get more detailed results
     r = http_get(api, params)
-    return xmltodict.parse(r.text)['dict']
+    data = xmltodict.parse(r.text)['dict']
+    data['key'] = words
+    return data
 
 def compile(data):
     return {
